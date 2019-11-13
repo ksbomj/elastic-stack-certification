@@ -1,0 +1,3 @@
+.idea
+./cluster/master-node/data/*
+./cluster/data1-node/data/*

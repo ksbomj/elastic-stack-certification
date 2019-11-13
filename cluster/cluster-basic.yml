@@ -1,0 +1,38 @@
+---
+version: '3.6'
+services:
+  master-node:
+    image: securityrobot/elasticsearch:7.4.2
+    container_name: master-node
+    ports:
+      - '127.0.0.1:9200:9200'
+      - '127.0.0.1:9300:9300'
+    networks: ['stack']
+    volumes:
+      - './master-node/config/elasticsearch.yml:/home/elastic/elasticsearch/config/elasticsearch.yml'
+      - './master-node/config/jvm.options:/home/elastic/elasticsearch/config/jvm.options'
+      - './master-node/data:/usr/share/elasticsearch/data'
+
+  data1-node:
+    image: securityrobot/elasticsearch:7.4.2
+    container_name: data1-node
+    ports:
+      - '127.0.0.1:9201:9200'
+      - '127.0.0.1:9301:9300'
+    networks: ['stack']
+    volumes:
+      - './data1-node/config/elasticsearch.yml:/home/elastic/elasticsearch/config/elasticsearch.yml'
+      - './data1-node/data:/usr/share/elasticsearch/data'
+
+  data2-node:
+    image: securityrobot/elasticsearch:7.4.2
+    container_name: data2-node
+    ports:
+      - '127.0.0.1:9202:9200'
+      - '127.0.0.1:9302:9300'
+    networks: ['stack']
+    volumes:
+      - './data2-node/config/elasticsearch.yml:/home/elastic/elasticsearch/config/elasticsearch.yml'
+      - './data2-node/data:/usr/share/elasticsearch/data'
+
+networks: {stack: {}}
